@@ -1,0 +1,493 @@
+---
+title: "R Package Development"
+subtitle: "Share some (very recent) experience"
+author: Sunny Tseng
+format:
+  revealjs: 
+    slide-number: true
+    preview-links: auto
+    #css: styles.css
+    #footer: <https://quarto.org>
+    theme: [default, styles.scss]
+    #smaller: true
+    #scrollable: true
+    incremental: true
+    embed-resources: true
+    width: 1200
+    fontsize: 1.7em
+editor: visual
+---
+
+## R Open Sci Championship Program
+
+-   One year project, with mentor, with funding
+
+-   February - April: technical skills training – where I am at now!
+
+-   March - July: Develop project with mentor
+
+![](images/clipboard-3065727163.png)
+
+## Proposed R package: `bbsTaiwan`!
+
+::: columns
+::: {.column width="50%"}
+![](images/clipboard-3918388572.png){fig-align="center" width="437"}
+:::
+
+::: {.column width="50%"}
+![](images/clipboard-2623136990.png){fig-align="center"}
+
+![](images/clipboard-2589671130.png){fig-align="center" width="586"}
+:::
+:::
+
+## Training sessions & today's sharing
+
+### Training sessions
+
+-   Week 1: Beautiful code, bacause we are worth it!
+
+-   Week 2: Package development: structure
+
+-   Week 3: Package development: testing
+
+-   Week 4: Package development: documentation
+
+-   Week 5: Package maintenance
+
+### Today's sharing
+
+-   General overview
+
+-   Useful resources and discussion
+
+-   Technical details - Not too much, as I am sill learning myself 😃
+
+## From R code to functions
+
+> DRY: Don’t Repeat Yourself
+
+🐈
+
+```{r, eval = FALSE, echo = TRUE}
+df <- tibble::tibble(
+  a = rnorm(10),
+  b = rnorm(10),
+  c = rnorm(10),
+  d = rnorm(10)
+)
+
+df$a <- (df$a - min(df$a, na.rm = TRUE)) / 
+  (max(df$a, na.rm = TRUE) - min(df$a, na.rm = TRUE))
+df$b <- (df$b - min(df$b, na.rm = TRUE)) / 
+  (max(df$b, na.rm = TRUE) - min(df$a, na.rm = TRUE))
+df$c <- (df$c - min(df$c, na.rm = TRUE)) / 
+  (max(df$c, na.rm = TRUE) - min(df$c, na.rm = TRUE))
+df$d <- (df$d - min(df$d, na.rm = TRUE)) / 
+  (max(df$d, na.rm = TRUE) - min(df$d, na.rm = TRUE))
+```
+
+## From R code to functions (con'd)
+
+> DRY: Don’t Repeat Yourself
+
+🦁
+
+```{r, eval = FALSE, echo = TRUE}
+# define a function for normalization
+rescale01 <- function(x) {
+  rng <- range(x, na.rm = TRUE)
+  (x - rng[1]) / (rng[2] - rng[1])
+}
+
+
+# apply the function on data
+df$a <- rescale01(df$a)
+df$b <- rescale01(df$b)
+df$c <- rescale01(df$c)
+df$d <- rescale01(df$d)
+```
+
+::: aside
+Code example from [R for Data Science](https://r4ds.had.co.nz/index.html)
+:::
+
+## From functions to package
+
+::: columns
+::: {.column width="50%"}
+### Purpose
+
+-   To share code
+
+-   To leverage existing tools
+
+-   To contribute to other package
+
+### Share code/data/R Markdown templates… with
+
+-   Future you,
+
+-   the collaborators you know,
+
+-   and the collaborators you don't know
+:::
+
+::: {.column width="50%"}
+![](images/clipboard-4014592725.png){width="554"}
+:::
+:::
+
+## Who can write a package - You!
+
+-   Can you open R or RStudio?
+
+-   Can you install a package?
+
+-   Have you ever written a function in R?
+
+-   Could you *learn* how to write a function in R?
+
+> You can write a package in R!
+
+# R package's bare bones
+
+To be less afraid you have to tell yourself that it’s simply a folder organized in a constrained way. -
+
+[Sébastien Rochette](https://thinkr.fr/transformer-plusieurs-scripts-eparpilles-en-beau-package-r)
+
+## Automation is the key
+
+-   The package "devtools"
+
+![](images/clipboard-3930913501.png){fig-align="center" width="561"}
+
+## Automation is the key
+
+devtools has undergone a [conscious uncoupling](https://web.archive.org/web/20140326060230/https://www.goop.com/journal/be/conscious-uncoupling) to split out functionality into packages:
+
+-   [testthat](https://github.com/r-lib/testthat): Writing and running tests (i.e. [`test()`](https://devtools.r-lib.org/reference/test.html)).
+
+-   [roxygen2](https://github.com/r-lib/roxygen2): Function and package documentation (i.e. [`document()`](https://devtools.r-lib.org/reference/document.html)).
+
+-   [remotes](https://github.com/r-lib/remotes): Installing packages (i.e. [`install_github()`](https://devtools.r-lib.org/reference/remote-reexports.html)).
+
+-   [usethis](https://github.com/r-lib/usethis): Automating package setup (i.e. `use_test()`).
+
+-   ...
+
+-   ... and many more.
+
+> Generally, you would not need to worry about these different packages, because devtools installs all of them automatically.
+
+## Basic components
+
+![](images/clipboard-3824478287.png){fig-align="center" width="858"}
+
+::: aside
+Image from: <https://github.com/susjoh/fibonacci/blob/master/Writing_R_Packages_from_Scratch_v2_annotated.pdf>
+:::
+
+## Package component
+
+#### DESCRIPTION
+
+-   Metadata (include authors, dependencies, versions, etc.)
+
+#### NAMESPACE
+
+-   Namespace (document the function names in your package, to avoiding name space overlap with other packages)
+
+#### R/
+
+-   A directory containing all the code, with each R script as a function.
+
+#### man/
+
+-   A directory containing object documentation.
+
+## On the journey
+
+::: columns
+::: {.column width="50%"}
+### Where I am at now (demo)
+
+-   Set up a Github repo
+
+-   Finished the package structure
+
+-   Failing the package test 🍓
+
+### Resources
+
+-   [R Packages (2e) by Jenny Bryan](https://r-pkgs.org/)
+
+-   [Happy Git with R by Jenny Bryan](https://happygitwithr.com/)
+
+-   [devtools package website](https://devtools.r-lib.org/index.html)
+
+-   [usethis package website](https://usethis.r-lib.org/index.html)
+:::
+
+::: {.column width="50%"}
+![](images/clipboard-510516381.png){fig-align="center" width="512"}
+:::
+:::
+
+# Before making a package - write beautiful code
+
+Because we all worth it
+
+## Well-proportioned code
+
+#### Your code is executed by machines but read by human who will check and build upon it.
+
+1.  Regular spacing between elements
+
+2.  Not too wide
+
+3.  Not too long
+
+4.  Not too stained: just the right amount of comments
+
+::: aside
+Code and slides in this section adapted from ROpenSci workshop given by [Maëlle Salmon](https://masalmon.eu/)
+:::
+
+## Regular spacing
+
+🐈
+
+``` r
+starwars%>%
+  select(name,height, mass,homeworld) %>%
+  mutate(
+    mass= NULL,
+    height =height *0.0328084 # convert to feet
+  )
+```
+
+🦁
+
+``` r
+starwars %>%
+  select(name, height, mass, homeworld) %>%
+  mutate(
+    mass = NULL,
+    height = height * 0.0328084 # convert to feet
+  )
+```
+
+## Regular spacing (con'd)
+
+### Just to name a few
+
+-   Always put a space after a comma, never before, just like English
+
+``` r
+a <- c("Alpine", "Badger", "Cougar", "Dissolve")
+```
+
+-   Most infix operators (`==`, `+`, `-`, `<-`, etc.) should always be surrounded by spaces:
+
+``` r
+a <- 5
+b <- 8
+
+c = a + b
+```
+
+### How to have a good habit?
+
+-   Learn from standard: [the tidyverse style guide](https://style.tidyverse.org/)
+
+-   Package `styler` does it automatically for you! (demo)
+
+-   In RStudio IDE, `Ctrl + I` for indentation
+
+## Not too wide
+
+🐈
+
+``` r
+a <- data %>% filter(species == "cougar") %>% group_by(age) %>% summarize(mean_weight = mean(weight))
+```
+
+🦁
+
+``` r
+a <- data %>% 
+  filter(species == "cougar") %>% 
+  group_by(age) %>% 
+  summarize(mean_weight = mean(weight))
+```
+
+### How to have a good habit?
+
+-   No more than 80 characters per line, or something similar.
+
+-   Package `linter` can help you with this! (demo)
+
+-   In RStudio IDE, use `Global Options` \> `Code` \> `Display` \> `Show Margin`
+
+## Not too long
+
+### How to have a good habit?
+
+-   The same as writing - one paragraph for one idea
+
+-   Make good use of empty line
+
+-   In RStudio IDE, use `Ctrl + Shift + R` to insert sections and outline (demo)
+
+-   Code efficiently!
+
+🐈 reinvent the wheel
+
+``` r
+default_values <- list(a = 1, b = 2)
+options <- list(b = 56)
+temporary_list <- default_values
+temporary_list[names(options)] <- options
+options <- temporary_list
+
+options
+```
+
+## Not to long
+
+🦁 Much better by using `modifyList` function
+
+``` r
+default_values <- list(a = 1, b = 2)
+options <- list(b = 56)
+options <- modifyList(default_values, options)
+options
+```
+
+### How to extend R vocabulary?
+
+-   Read other people's code (colleague, workshop, blog post, etc.)
+
+-   Ask others to read your code
+
+-   Internet!
+
+## Not too stained
+
+### As few comments as possible
+
+Some people might do this...
+
+```{r, eval = FALSE, echo = TRUE}
+# starwars data
+starwars %>%
+  # select name and mass
+  select(name, mass) %>%
+  mutate(
+    # add mass2 as double of mass
+    mass2 = mass * 2,
+    # add mass2_squareed as squared mass2
+    mass2_squared = mass2 * mass2
+  )
+```
+
+Too many comments might be dangerous!
+
+## Well-proportioned code
+
+#### Your code is executed by machines but read by human who will check and build upon it.
+
+1.  Regular spacing between elements
+
+2.  Not too wide
+
+3.  Not too long
+
+4.  Not too stained: just the right amount of comments
+
+### Other resources about R
+
+-   A talk [Code Smells and Feels](https://github.com/jennybc/code-smells-and-feels) by Jenny Bryan
+
+-   [R Open Sci](https://ropensci.org/)
+
+-   [RLadies](https://rladies.org/)
+
+-   [Posit](https://posit.co/) annual conference
+
+-   International [R user](https://events.linuxfoundation.org/user/) conference
+
+# Before making a package - use R project and `here` to manage your code
+
+I am so grateful to learn about this early on in my R journey
+
+## Concept of a project
+
+> If the first line of your R script is `setwd("C:\Users\jenny\path\that\only\I\have")` I will come into your office and SET YOUR COMPUTER ON FIRE 🔥. - Jenny Bryan
+
+-   Have you ever received a R script from a friend with this line
+
+-   And it's 0% chance that you can run this `setwd()` without an error
+
+-   If you never heard about `setwd()`
+
+-   Don't worry, you don't need to know 😄
+
+![](images/paste-58AC1017.png){.absolute top="400" right="0" width="507"}
+
+## Concept of a project
+
+> A folder on your computer that holds all the files relevant to that particular piece of work.
+
+-   Get your files organized
+
+-   Your work is reproducible
+
+-   There are two things that can help us creating a self-contained project
+
+### 1. R project
+
+A self-contained working environment with folders for data, scripts, outputs, etc
+
+### 2. `here` package
+
+When import/export data is required, filepaths are written relative to the root folder of the R project.
+
+## R project: how to use
+
+1.  Open R Studio
+2.  Select `File` \> `New Project` \> `New Directory` \> provide name and where you want it to be saved
+3.  The R project you create will come in as a folder containing a *.Rproj* file
+4.  This is a shortcut and likely the primary way you will open your project
+5.  Your R Studio top-right corner would show the project you are in
+
+![](images/paste-2092CCC6.png){fig-align="center" width="435"}
+
+::: aside
+Artwork by Allison Horst
+:::
+
+## `here` package: how to use
+
+1.  It's a good practice to structure your working directory in a consistent way
+
+    -   ./data: to include all the data
+
+    -   ./docs: to include none data files such as manuscript
+
+    -   ./R: R script
+
+2.  Load the package by running `library(here)`
+
+3.  `here` would set the root folder as the folder you have your `.Rproj` file
+
+4.  Then you will only need relative path whenever you need to import data
+
+### Use relative path, not absolute path to include data
+
+```{r, eval = FALSE, echo = TRUE}
+library(here) 
+my_data <- read_csv(here("data", "my_data.csv")) 
+```
