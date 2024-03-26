@@ -139,6 +139,8 @@ Code example from [R for Data Science](https://r4ds.had.co.nz/index.html)
 :::
 :::
 
+-   A package for WildCo lab's camera trap analysis functions 🥰💻😄
+
 ## Who can write a package - You!
 
 -   Can you open R or RStudio?
@@ -333,10 +335,11 @@ a <- data %>%
 
 ## Not too long
 
-### How to have a good habit?
-
 -   The same as writing - one paragraph for one idea
 
+```{=html}
+<!-- -->
+```
 -   Make good use of empty line
 
 -   In RStudio IDE, use `Ctrl + Shift + R` to insert sections and outline (demo)
@@ -345,7 +348,7 @@ a <- data %>%
 
 🐈 reinvent the wheel
 
-``` r
+```{r eval = TRUE, echo=TRUE}
 default_values <- list(a = 1, b = 2)
 options <- list(b = 56)
 temporary_list <- default_values
@@ -359,7 +362,7 @@ options
 
 🦁 Much better by using `modifyList` function
 
-``` r
+```{r eval = TRUE, echo=TRUE}
 default_values <- list(a = 1, b = 2)
 options <- list(b = 56)
 options <- modifyList(default_values, options)
@@ -491,3 +494,4 @@ Artwork by Allison Horst
 library(here) 
 my_data <- read_csv(here("data", "my_data.csv")) 
 ```
+
