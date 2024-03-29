@@ -337,9 +337,8 @@ a <- data %>%
 
 -   The same as writing - one paragraph for one idea
 
-```{=html}
 <!-- -->
-```
+
 -   Make good use of empty line
 
 -   In RStudio IDE, use `Ctrl + Shift + R` to insert sections and outline (demo)
@@ -494,4 +493,3 @@ Artwork by Allison Horst
 library(here) 
 my_data <- read_csv(here("data", "my_data.csv")) 
 ```
-
