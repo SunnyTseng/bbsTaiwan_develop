@@ -1,44 +1,49 @@
 
 
+# source the functions ----------------------------------------------------
+
 source(here::here("R", "bbs_translation.R"))
 source(here::here("R", "bbs_subset.R"))
 
 
+# example code for demonstration ------------------------------------------
+
 bbs_translation(species = "紅頭山雀")
 bbs_translation(species = "棕面鶯")
 
-my_data <- bbs_GBIF_subset(folder = here::here("data", "dwca-bbstaiwan_dataset-v1.9"),
-                           from = 2010,
-                           to = 2012,
-                           species_list = c("Aegithalos concinnus", "Abroscopus albogularis"))
 
 
-library(terra)
-library(here)
-library(tidyverse)
-library(tidyterra)
+# parameters for development ----------------------------------------------
 
-## map of taiwan, from https://geodata.mit.edu/catalog/stanford-dz142zj5454
-## CRS: lon/lat WGS 84 (EPSG:4326)
-twmap <- terra::vect(here::here("data", "taiwan"))
+occurrence_sub <- bbs_GBIF_subset(folder = here::here("data", "dwca-bbstaiwan_dataset-v1.9"),
+                                  from = 2010,
+                                  to = 2012,
+                                  species_list = c("Aegithalos concinnus", "Abroscopus albogularis"))
 
 
-## map of important bird region, from https://age.triwra.org.tw/Page/MapLayerDataList
-## CRS: lon/lat WGS 84 (EPSG:4326)
-birdmap <- terra::vect(here::here("data", "重要野鳥棲地"))
+# main code for development -----------------------------------------------
 
+## transform the data into spatial info
+all_site <- site_info |>
+  dplyr::select(site, X_wgs84, Y_wgs84) |>
+  tidyr::drop_na() |>
+  terra::vect(geom=c("X_wgs84", "Y_wgs84"), crs = terra::crs(tw_map))
 
-## create SpatExtent
-aoi <- birdmap %>%
-  ext() %>%
-  + c(0 , 0.1, 0, -1)
-
+bird_site <- occurrence_sub |>
+  dplyr::select(site, scientificName, X_wgs84, Y_wgs84) |>
+  dplyr::distinct(.keep_all = TRUE) |>
+  tidyr::drop_na() |>
+  terra::vect(geom=c("X_wgs84", "Y_wgs84"), crs = terra::crs(tw_map))
 
 ## create map
-distribution_map <- ggplot() +
-  geom_spatvector(data = twmap %>% crop(aoi), fill = "white") +
-  geom_spatvector(data = birdmap %>% crop(aoi), fill = "green", alpha = 0.2, colour = NA) +
-  theme_bw()
+distribution_map <- ggplot2::ggplot() +
+  tidyterra::geom_spatvector(data = tw_map, fill = "white") +
+  #tidyterra::geom_spatvector(data = bird_map, fill = "green", alpha = 0.2, col = NA) +
+  tidyterra::geom_spatvector(data = all_site, fill = "grey", alpha = 0.1) +
+  tidyterra::geom_spatvector(data = bird_site, ggplot2::aes(col = scientificName)) +
+  ggplot2::theme_bw()
+
+
 distribution_map
 
 

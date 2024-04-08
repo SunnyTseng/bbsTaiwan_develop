@@ -52,7 +52,7 @@ bbs_GBIF_subset <- function(folder, from, to, species_list) {
     dplyr::left_join(site_info, by = dplyr::join_by(site == site)) |>
     dplyr::select(year, eventID, occurrenceID, scientificName, vernacularName, individualCount,
                   weather, wind, habitat, time_slot, distance, flock,
-                  city, district, location, region, elevation, X_wgs84, Y_wgs84)
+                  site, city, district, location, region, elevation, X_wgs84, Y_wgs84)
 }
 
 
