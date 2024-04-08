@@ -10,7 +10,6 @@ bbs_GBIF_subset <- function(folder, from, to, species_list) {
   measurementorfacts <- readr::read_tsv(paste0(folder, "/measurementorfacts.txt"), lazy = TRUE)
   extendedmeasurementorfact <- readr::read_tsv(paste0(folder, "/extendedmeasurementorfact.txt"), lazy = TRUE)
 
-  bbs_site <- readr::read_csv(here::here("data", "bbs_site_list_v2.7.csv"), lazy = TRUE)
 
   # clean data --------------------------------------------------------------
 
@@ -32,23 +31,6 @@ bbs_GBIF_subset <- function(folder, from, to, species_list) {
     dplyr::select(id, measurementType, measurementValue) |>
     tidyr::pivot_wider(names_from = measurementType, values_from = measurementValue) |>
     dplyr::rename(time_slot = "時段", distance = "距離", flock = "結群")
-
-  site_info <- bbs_site |>
-    tidyr::drop_na("樣區編號...7") |>
-    dplyr::mutate(region = dplyr::case_when(
-      ELEV == 3 ~ 5,
-      ELEV == 2 ~ 4,
-      ELEV == 1 & HJHsiu3 == "West" ~ 3,
-      ELEV == 1 & HJHsiu3 == "East" ~ 2,
-      ELEV == 1 & HJHsiu3 == "North" ~ 1,
-      ELEV == 1 & HJHsiu3 == "Lanyu" ~ 6,
-      .default = 7
-    )) |>
-    dplyr::rename(site = "樣區編號...7",
-                  city = "縣市",
-                  district = "鄉鎮",
-                  location = "地點 (樣區名稱)",
-                  elevation = "樣區所屬海拔段")
 
 
   # filter occurrence to a given species and year ---------------------------

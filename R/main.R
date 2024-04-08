@@ -11,3 +11,6 @@ my_data <- bbs_GBIF_subset(folder = here::here("data", "dwca-bbstaiwan_dataset-v
                            from = 2010,
                            to = 2012,
                            species_list = c("Aegithalos concinnus", "Abroscopus albogularis"))
+
+
+library(terra)
