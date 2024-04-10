@@ -1,9 +1,8 @@
-R package development practice
+bbsTaiwan package development repository
 ================
 2024-03-25
 
-This is a repository for storaging all the resources for making the R
-package “bbsTaiwan”
+This is a repository for storaging all the resources for making the R package “bbsTaiwan”. All the functions were tested withing this repo before putting into bbsTaiwan.
 
 ## Resources
 
