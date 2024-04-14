@@ -33,7 +33,9 @@ site_info <- readr::read_csv(here::here("data", "bbs_site_list_v2.7.csv"), lazy 
 
 ## From: https://geodata.mit.edu/catalog/stanford-dz142zj5454
 ## CRS: lon/lat WGS 84 (EPSG:4326)
-tw_map <- terra::vect(here::here("data", "taiwan"))
+tw_map <- terra::vect(here::here("data", "taiwan")) |>
+  terra::crop(terra::ext(c(xmin = 118.1, xmax = 122.1,
+                           ymin = 21.55, ymax = 25.69)))
 
 
 # map of important bird region --------------------------------------------

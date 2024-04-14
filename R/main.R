@@ -12,14 +12,12 @@ bbs_translation(species = "白頭翁")
 bbs_translation(species = "烏頭翁")
 
 
-
 # parameters for development ----------------------------------------------
 
 occurrence_sub <- bbs_GBIF_subset(folder = here::here("data", "dwca-bbstaiwan_dataset-v1.9"),
                                   from = 2010,
                                   to = 2012,
                                   species_list = c("Pycnonotus sinensis", "Pycnonotus taivanus"))
-
 
 # main code for development -----------------------------------------------
 
