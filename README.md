@@ -1,8 +1,9 @@
-bbsTaiwan package development repository
+R package development practice
 ================
 2024-03-25
 
-This is a repository for storaging all the resources for making the R package “bbsTaiwan”. All the functions were tested withing this repo before putting into bbsTaiwan.
+This is a repository for storaging all the resources for making the R
+package “bbsTaiwan”
 
 ## Resources
 
@@ -34,6 +35,16 @@ This is a repository for storaging all the resources for making the R package �
 
 - [Example R script for pulling data down from
   GBIF](https://github.com/ikea-shark/up_and_down_vis?fbclid=IwAR3I7V8kJrh9EZi42xR_Wtcw619QNpZBPucIu7lLaI8NNWN-9u-l_0GYTj8)
+
+#### Package logo design
+
+- [Tips to design hex
+  logo](https://zhuhao.org/post/tips-on-designing-a-hex-sticker-for-rstats-packages/)
+
+- [Required dimension](http://hexb.in/sticker.html)
+
+- [hexSticker R package for creating logo in
+  streamline](https://github.com/GuangchuangYu/hexSticker)
 
 ## Working note
 
