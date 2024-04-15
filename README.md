@@ -75,3 +75,12 @@ package “bbsTaiwan”
 - Finished listing questions and set a meeting with Jerome
 
 - Finished listing questions for programming with Eunseup
+
+#### 20240414
+
+- Finished the function for visualizing the GBIF extracted data
+
+- Updated the workflow and the example code for the main bbsTaiwan repo
+
+- Next: digging into the preparation code - clean the columns, drop
+  rows, get environmental data if needed
