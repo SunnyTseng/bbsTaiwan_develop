@@ -32,15 +32,25 @@ bbs_GBIF_subset <- function(folder, from, to, species_list) {
     tidyr::pivot_wider(names_from = measurementType, values_from = measurementValue) |>
     dplyr::rename(time_slot = "時段", distance = "距離", flock = "結群")
 
+  site_info <- event |>
+    dplyr::mutate(site = stringr::str_split_i(id, pattern = "_", i = 3)) |>
+    dplyr::mutate(plot = stringr::str_split_i(id, pattern = "_", i = 4)) |>
+    dplyr::select(site, plot, locationID, locality, decimalLatitude, decimalLongitude) |>
+    tidyr::drop_na() |>
+    dplyr::distinct(site, plot, locationID, .keep_all = TRUE)
+
+# site, city, district, location, region, elevation, X_wgs84, Y_wgs84
 
   # filter occurrence to a given species and year ---------------------------
 
   occurrence_filter <- occurrence |>
-    dplyr::mutate(year = stringr::str_split_i(id, pattern = "_", i = 2)) |>
-    dplyr::mutate(site = stringr::str_split_i(id, pattern = "_", i = 3)) |>
-    dplyr::mutate(year = as.numeric(year)) |>
+    dplyr::mutate(year = stringr::str_split_i(id, pattern = "_", i = 2) |> as.numeric()) |>
     dplyr::filter(year %in% c(from, to)) |>
-    dplyr::filter(scientificName %in% species_list)
+    dplyr::filter(scientificName %in% species_list) |>
+    dplyr::mutate(locationID =
+                    paste0(stringr::str_split_i(id, pattern = "_", i = 3)
+                           ,"_",
+                           stringr::str_split_i(id, pattern = "_", i = 4)))
 
 
 
@@ -49,15 +59,17 @@ bbs_GBIF_subset <- function(folder, from, to, species_list) {
   occurrence_add_var <- occurrence_filter |>
     dplyr::left_join(event_info, by = dplyr::join_by(id == id)) |>
     dplyr::left_join(occurrence_info, by = dplyr::join_by(occurrenceID == id)) |>
-    dplyr::left_join(site_info, by = dplyr::join_by(site == site)) |>
+    dplyr::left_join(site_info, by = dplyr::join_by(locationID == locationID)) |>
     dplyr::select(year, eventID, occurrenceID, scientificName, vernacularName, individualCount,
                   weather, wind, habitat, time_slot, distance, flock,
-                  site, city, district, location, region, elevation, X_wgs84, Y_wgs84)
+                  site, plot, locationID, locality, decimalLatitude, decimalLongitude)
+
+  return(list(occurrence = occurrence_add_var,
+              site_info = site_info))
 }
 
 
 # requires ----------------------------------------------------------------
 
 ### user package: here, dplyr, readr, tidyr
-### local dataset: site dataset
 
