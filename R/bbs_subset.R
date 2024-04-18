@@ -1,7 +1,36 @@
 
 # main function -----------------------------------------------------------
 
-bbs_GBIF_subset <- function(folder, from, to, species_list) {
+bbs_GBIF_subset <- function(folder, y_min = 2009, y_max = 2029, target_species = NULL) {
+
+
+  # argument check ----------------------------------------------------------
+
+  checkmate::assert_directory_exists(folder, access = "r")
+
+  checkmate::assert_number(
+    y_min,
+    na.ok = FALSE,
+    lower = 2009,
+    upper = 2029
+  )
+
+  checkmate::assert_number(
+    y_max,
+    na.ok = FALSE,
+    lower = 2009,
+    upper = 2029
+  )
+
+  if (is.null(target_species)) {
+    target_species <- bird_info %>% pull(scientificName)
+  } else {
+    checkmate::assert_character(
+      target_species,
+      min.len = 1
+    )
+  }
+
 
   # read data ---------------------------------------------------------------
 
@@ -13,9 +42,6 @@ bbs_GBIF_subset <- function(folder, from, to, species_list) {
 
   # clean data --------------------------------------------------------------
 
-  ## Q1 The measurementorfacts is exactly the same as extended measurementorfact
-  ## Q2 There are some non-systematic naming in the id column, a mixed id for event and occurrence
-  ## Q3 There are some id with duplicated weather measurement
   ## I guess there was a mixed up with both sheets. These codes needs to be updated once new data is up on GBIF
 
   event_info <- measurementorfacts |>
@@ -45,8 +71,8 @@ bbs_GBIF_subset <- function(folder, from, to, species_list) {
 
   occurrence_filter <- occurrence |>
     dplyr::mutate(year = stringr::str_split_i(id, pattern = "_", i = 2) |> as.numeric()) |>
-    dplyr::filter(year %in% c(from, to)) |>
-    dplyr::filter(scientificName %in% species_list) |>
+    dplyr::filter(year %in% seq(y_min, y_max)) |>
+    dplyr::filter(scientificName %in% target_species) |>
     dplyr::mutate(locationID =
                     paste0(stringr::str_split_i(id, pattern = "_", i = 3)
                            ,"_",

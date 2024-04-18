@@ -10,13 +10,13 @@ source(here::here("R", "required_files_preparation.R"))
 
 # example code for demonstration ------------------------------------------
 
-bbs_translation(species = "山紅頭")
-bbs_translation(species = "巨嘴鴉")
+bbs_translation(species = c("小虎鶇", "台灣朱雀"))
 
 occurrence_sub <- bbs_GBIF_subset(folder = here::here("data", "dwca-bbstaiwan_dataset-v1.9"),
-                                  from = 2010,
-                                  to = 2012,
-                                  species_list = c("Cyanoderma ruficeps", "Corvus macrorhynchos"))
+                                  y_min = 2009,
+                                  y_max = 2016,
+                                  target_species = c("Zoothera dauma dauma", "Carpodacus formosanus"))
+
 
 bird_plot <- bbs_visualization(data = occurrence_sub)
 bird_plot
