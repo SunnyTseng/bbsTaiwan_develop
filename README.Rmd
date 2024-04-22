@@ -62,7 +62,7 @@ This is a repository for storaging all the resources for making the R package "b
 
 -   Finished listing questions for programming with Eunseup
 
-#### 20240414 
+#### 20240414
 
 -   Finished the function for visualizing the GBIF extracted data
 
