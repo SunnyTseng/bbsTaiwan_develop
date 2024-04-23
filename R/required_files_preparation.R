@@ -69,3 +69,27 @@ save(tw_map, file = here::here("data", "package_data", "tw_map.rda"))
 ## From: https://age.triwra.org.tw/Page/MapLayerDataList
 ## CRS: lon/lat WGS 84 (EPSG:4326)
 ## bird_map <- terra::vect(here::here("data", "重要野鳥棲地"))
+
+
+
+# BBS data on GBIF  -------------------------------------------------------
+
+# read data ---------------------------------------------------------------
+
+folder = here::here("data", "dwca-bbstaiwan_dataset-v1.9")
+
+event <- readr::read_tsv(paste0(folder, "/event.txt"), lazy = TRUE)
+occurrence <- readr::read_tsv(paste0(folder, "/occurrence.txt"), lazy = TRUE)
+measurementorfacts <- readr::read_tsv(paste0(folder, "/measurementorfacts.txt"), lazy = TRUE)
+extendedmeasurementorfact <- readr::read_tsv(paste0(folder, "/extendedmeasurementorfact.txt"), lazy = TRUE)
+
+save(event, file = here::here("data", "package_data", "event.rda"))
+save(occurrence, file = here::here("data", "package_data", "occurrence.rda"))
+save(measurementorfacts, file = here::here("data", "package_data", "measurementorfacts.rda"))
+save(extendedmeasurementorfact, file = here::here("data", "package_data", "extendedmeasurementorfact.rda"))
+
+
+
+
+
+

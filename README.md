@@ -23,6 +23,11 @@ package “bbsTaiwan”
 - [Taiwan BBS data on Google
   Drive](https://drive.google.com/drive/folders/1ex6EDkXv82mpEKcPkOYrQJ_anlu3pI1E?fbclid=IwAR38wYdRlz6swG-ffwWLrclVPkl1d6DshDTHD9rElGlJThweEeho9JtgkEE)
 
+#### Publications from Jerome
+
+- [BBS Taiwan as a book
+  chapter](https://link.springer.com/chapter/10.1007/978-4-431-54783-9_3)
+
 #### Workflow and modelling
 
 - [bbsBayes package
@@ -84,3 +89,12 @@ package “bbsTaiwan”
 
 - Next: digging into the preparation code - clean the columns, drop
   rows, get environmental data if needed
+
+#### 20240423
+
+- Cleaned up the dataset default
+
+- Next: have to deal with the multiple values issue in the `pivot_wider`
+  in the event and the occurrence data
+
+- Next: dig into data cleaning and get ready for modelling

@@ -13,8 +13,8 @@ bbs_translation <- function(species_name) {
     }
 
     bird_name <- bird_info |>
-      dplyr::mutate(in_out = purrr::map_lgl(.x = chineseName, .f =~ species_name %in% .x)) %>%
-      dplyr::filter(in_out) %>%
+      dplyr::mutate(in_out = purrr::map_lgl(.x = chineseName, .f =~ species_name %in% .x)) |>
+      dplyr::filter(in_out) |>
       dplyr::pull(scientificName)
     return(bird_name)
   }
@@ -32,7 +32,7 @@ bbs_translation <- function(species_name) {
   # main function body ----------------------------------------------------
 
   bird_name <- species_name |>
-    map_chr(decision)
+    purrr::map_chr(decision)
 
   return(bird_name)
 }

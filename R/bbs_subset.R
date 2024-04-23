@@ -1,12 +1,10 @@
 
 # main function -----------------------------------------------------------
 
-bbs_GBIF_subset <- function(folder, y_min = 2009, y_max = 2029, target_species = NULL) {
+bbs_GBIF_subset <- function(y_min = 2009, y_max = 2029, target_species = NULL) {
 
 
   # argument check ----------------------------------------------------------
-
-  checkmate::assert_directory_exists(folder, access = "r")
 
   checkmate::assert_number(
     y_min,
@@ -30,15 +28,6 @@ bbs_GBIF_subset <- function(folder, y_min = 2009, y_max = 2029, target_species =
       min.len = 1
     )
   }
-
-
-  # read data ---------------------------------------------------------------
-
-  event <- readr::read_tsv(paste0(folder, "/event.txt"), lazy = TRUE)
-  occurrence <- readr::read_tsv(paste0(folder, "/occurrence.txt"), lazy = TRUE)
-  measurementorfacts <- readr::read_tsv(paste0(folder, "/measurementorfacts.txt"), lazy = TRUE)
-  extendedmeasurementorfact <- readr::read_tsv(paste0(folder, "/extendedmeasurementorfact.txt"), lazy = TRUE)
-
 
   # clean data --------------------------------------------------------------
 

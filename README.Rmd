@@ -20,6 +20,10 @@ This is a repository for storaging all the resources for making the R package "b
 
 -   [Taiwan BBS data on Google Drive](https://drive.google.com/drive/folders/1ex6EDkXv82mpEKcPkOYrQJ_anlu3pI1E?fbclid=IwAR38wYdRlz6swG-ffwWLrclVPkl1d6DshDTHD9rElGlJThweEeho9JtgkEE)
 
+#### Publications from Jerome
+
+-   [BBS Taiwan as a book chapter](https://link.springer.com/chapter/10.1007/978-4-431-54783-9_3)
+
 #### Workflow and modelling
 
 -   [bbsBayes package publication](chrome-extension://efaidnbmnnnibpcajpcglclefindmkaj/https://storage.googleapis.com/jnl-up-j-jors-files/journals/1/articles/329/submission/proof/329-1-5163-1-10-20210720.pdf)
@@ -69,3 +73,11 @@ This is a repository for storaging all the resources for making the R package "b
 -   Updated the workflow and the example code for the main bbsTaiwan repo
 
 -   Next: digging into the preparation code - clean the columns, drop rows, get environmental data if needed
+
+#### 20240423
+
+-   Cleaned up the dataset default
+
+-   Next: have to deal with the multiple values issue in the `pivot_wider` in the event and the occurrence data
+
+-   Next: dig into data cleaning and get ready for modelling
