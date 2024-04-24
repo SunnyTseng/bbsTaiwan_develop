@@ -37,20 +37,25 @@ bbs_GBIF_subset <- function(y_min = 2009, y_max = 2029, target_species = NULL) {
     dplyr::mutate(type = stringr::str_length(id)) |> # two lines to retain only event related measurement, like weather
     dplyr::filter(type == 23) |>
     dplyr::select(id, measurementType, measurementValue) |>
-    tidyr::pivot_wider(names_from = measurementType, values_from = measurementValue) |>
+    tidyr::pivot_wider(names_from = measurementType,
+                       values_from = measurementValue,
+                       values_fn =~ dplyr::first(na.omit(.x))) |>
     dplyr::rename(weather = "天氣代號", wind = "風速代號", habitat = "棲地代號")
 
   occurrence_info <- extendedmeasurementorfact |>
     dplyr::mutate(type = stringr::str_length(id)) |> # two lines to retain occurrence related measurement, like
     dplyr::filter(type == 30) |>
     dplyr::select(id, measurementType, measurementValue) |>
-    tidyr::pivot_wider(names_from = measurementType, values_from = measurementValue) |>
+    tidyr::pivot_wider(names_from = measurementType,
+                       values_from = measurementValue,
+                       values_fn =~ dplyr::first(na.omit(.x))) |>
     dplyr::rename(time_slot = "時段", distance = "距離", flock = "結群")
 
   site_info <- event |>
     dplyr::mutate(site = stringr::str_split_i(id, pattern = "_", i = 3)) |>
     dplyr::mutate(plot = stringr::str_split_i(id, pattern = "_", i = 4)) |>
-    dplyr::select(site, plot, locationID, locality, decimalLatitude, decimalLongitude) |>
+    dplyr::select(site, plot, locationID, locality, decimalLatitude, decimalLongitude,
+                  eventDate, eventTime) |>
     tidyr::drop_na() |>
     dplyr::distinct(site, plot, locationID, .keep_all = TRUE)
 
@@ -76,7 +81,7 @@ bbs_GBIF_subset <- function(y_min = 2009, y_max = 2029, target_species = NULL) {
     dplyr::left_join(occurrence_info, by = dplyr::join_by(occurrenceID == id)) |>
     dplyr::left_join(site_info, by = dplyr::join_by(locationID == locationID)) |>
     dplyr::select(year, eventID, occurrenceID, scientificName, vernacularName, individualCount,
-                  weather, wind, habitat, time_slot, distance, flock,
+                  eventDate, eventTime, weather, wind, habitat, time_slot, distance, flock,
                   site, plot, locationID, locality, decimalLatitude, decimalLongitude)
 
   return(list(occurrence = occurrence_add_var,
