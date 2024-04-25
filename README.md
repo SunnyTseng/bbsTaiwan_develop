@@ -11,17 +11,15 @@ package “bbsTaiwan”
 
 - [Taiwan BBS official website](https://sites.google.com/view/bbstaiwan)
 
-- [Taiwan BBS 2022 annual
-  report](chrome-extension://efaidnbmnnnibpcajpcglclefindmkaj/file:///C:/Users/sunny/Downloads/2022%E5%B9%B4BBS%20Taiwan%E5%B9%B4%E5%A0%B1.pdf)
+- [Taiwan BBS 2022 annual report](chrome-extension://efaidnbmnnnibpcajpcglclefindmkaj/file:///C:/Users/sunny/Downloads/2022%E5%B9%B4BBS%20Taiwan%E5%B9%B4%E5%A0%B1.pdf)
 
-- [Taiwan BBS analysis Github
-  page](https://github.com/jerome-cjko/bbstaiwan_trend)
+- [Taiwan BBS analysis Github page](https://github.com/jerome-cjko/bbstaiwan_trend)
 
-- [Taiwan BBS data on
-  GBIF](https://www.gbif.org/dataset/f170f056-3f8a-4ef3-ac9f-4503cc854ce0)
+- [Use poptrend package to analyze BBS Taiwan data](https://www.sciencedirect.com/science/article/pii/S1470160X22013127#s0085)
 
-- [Taiwan BBS data on Google
-  Drive](https://drive.google.com/drive/folders/1ex6EDkXv82mpEKcPkOYrQJ_anlu3pI1E?fbclid=IwAR38wYdRlz6swG-ffwWLrclVPkl1d6DshDTHD9rElGlJThweEeho9JtgkEE)
+- [Taiwan BBS data on GBIF](https://www.gbif.org/dataset/f170f056-3f8a-4ef3-ac9f-4503cc854ce0)
+
+- [Taiwan BBS data on Google Drive](https://drive.google.com/drive/folders/1ex6EDkXv82mpEKcPkOYrQJ_anlu3pI1E?fbclid=IwAR38wYdRlz6swG-ffwWLrclVPkl1d6DshDTHD9rElGlJThweEeho9JtgkEE)
 
 #### Publications from Jerome
 
@@ -30,8 +28,7 @@ package “bbsTaiwan”
 
 #### Workflow and modelling
 
-- [bbsBayes package
-  publication](chrome-extension://efaidnbmnnnibpcajpcglclefindmkaj/https://storage.googleapis.com/jnl-up-j-jors-files/journals/1/articles/329/submission/proof/329-1-5163-1-10-20210720.pdf)
+- [bbsBayes package publication](chrome-extension://efaidnbmnnnibpcajpcglclefindmkaj/https://storage.googleapis.com/jnl-up-j-jors-files/journals/1/articles/329/submission/proof/329-1-5163-1-10-20210720.pdf)
 
 - [rtrim package](https://github.com/SNStatComp/rtrim)
 
@@ -98,3 +95,9 @@ package “bbsTaiwan”
   in the event and the occurrence data
 
 - Next: dig into data cleaning and get ready for modelling
+
+#### 20240425
+
+- Checked both rtrim and poptrend. Sent an request for poptrend anallysis.
+- rtrim package is out of date - can't install in RStudio
+- poptrend is published last year on CRAN, can potentially be an option
