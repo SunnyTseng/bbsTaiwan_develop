@@ -95,3 +95,9 @@ package “bbsTaiwan”
   in the event and the occurrence data
 
 - Next: dig into data cleaning and get ready for modelling
+
+#### 20240425
+
+- Checked both rtrim and poptrend. Sent an request for poptrend anallysis.
+- rtrim package is out of date - can't install in RStudio
+- poptrend is published last year on CRAN, can potentially be an option
