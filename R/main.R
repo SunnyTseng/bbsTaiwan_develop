@@ -23,7 +23,7 @@ bbs_translation(species = c("小虎鶇", "台灣朱雀"))
 
 occurrence_sub <- bbs_GBIF_subset(y_min = 2009,
                                   y_max = 2016,
-                                  target_species = c("Zoothera dauma dauma", "Carpodacus formosanus"))
+                                  target_species = c("Carpodacus formosanus"))
 
 bird_plot <- bbs_visualization(data = occurrence_sub)
 bird_plot
@@ -32,6 +32,8 @@ bird_plot
 # development for next step -----------------------------------------------
 
 bird_occ <- occurrence_sub$occurrence
+
+
 
 
 

@@ -58,11 +58,24 @@ save(bird_info, file = here::here("data", "package_data", "bird_info.rda"))
 
 ## From: https://geodata.mit.edu/catalog/stanford-dz142zj5454
 ## CRS: lon/lat WGS 84 (EPSG:4326)
-tw_map <- terra::vect(here::here("data", "taiwan")) |>
-  terra::crop(terra::ext(c(xmin = 118.1, xmax = 122.1,
-                           ymin = 21.55, ymax = 25.69)))
+
+
+
+tw_map <- sf::st_read(here::here("data", "taiwan")) |>
+  sf::st_crop(c(xmin = 118.1, xmax = 122.1,
+                ymin = 21.55, ymax = 25.69))
 
 save(tw_map, file = here::here("data", "package_data", "tw_map.rda"))
+
+
+# elevation of Taiwan -----------------------------------------------------
+
+## From: https://github.com/WanJyunChen/Taiwan_environmental_dataset
+## CRS: lon/lat WGS 84 (EPSG:4326)
+
+elev <- raster::raster(here::here("data", "G1km_TWD97-121_DTM_ELE.tif"))
+
+
 
 # map of important bird region --------------------------------------------
 
