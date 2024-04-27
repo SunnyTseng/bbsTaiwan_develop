@@ -10,7 +10,7 @@
 ### Second meeting - package development: the mechanics (Redo again)
 
 - Slides: https://rpkgdev-mechanics-2024.netlify.app/session-1/    
-- Demo: https://rpkgdev-mechanics-2024.netlify.app/session-1/demo/
+- Demo: c
 - Video: https://drive.google.com/file/d/1TRnXdQr6UUWJYCrwV05-F9N2zTcvni1C/view?usp=sharing
 - Video summary with timestamp: https://drive.google.com/file/d/1DekJtcr4D-_DUopZ8Q6GOcAuvXdox-W4/view?usp=share_link
 - Subtitles: https://drive.google.com/file/d/1XBi_n58Niu432XrVeQakPgSFHNuTZwqB/view?usp=share_link

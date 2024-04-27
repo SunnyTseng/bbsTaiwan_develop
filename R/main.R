@@ -11,7 +11,6 @@ source(here::here("R", "bbs_visualization.R"))
 
 load(file = here::here("data", "package_data", "bird_info.rda"))
 load(file = here::here("data", "package_data", "tw_map.rda"))
-
 load(file = here::here("data", "package_data", "event.rda"))
 load(file = here::here("data", "package_data", "occurrence.rda"))
 load(file = here::here("data", "package_data", "measurementorfacts.rda"))

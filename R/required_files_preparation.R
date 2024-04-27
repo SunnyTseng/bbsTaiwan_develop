@@ -73,7 +73,7 @@ save(tw_map, file = here::here("data", "package_data", "tw_map.rda"))
 ## From: https://github.com/WanJyunChen/Taiwan_environmental_dataset
 ## CRS: lon/lat WGS 84 (EPSG:4326)
 
-elev <- raster::raster(here::here("data", "G1km_TWD97-121_DTM_ELE.tif"))
+tw_elev <- raster::raster(here::here("data", "G1km_TWD97-121_DTM_ELE.tif"))
 
 
 
