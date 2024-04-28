@@ -7,6 +7,12 @@ package “bbsTaiwan”
 
 ## Resources
 
+#### Package building
+
+- [rOpenSci training workshops](https://rpkgdev-mechanics-2024.netlify.app/session-1/demo/)
+
+- [R package 2e](https://r-pkgs.org/)
+
 #### Taiwan BBS
 
 - [Taiwan BBS official website](https://sites.google.com/view/bbstaiwan)
@@ -32,11 +38,7 @@ package “bbsTaiwan”
 
 - [rtrim package](https://github.com/SNStatComp/rtrim)
 
-- [rgbif package to get GBIF
-  data](https://inbo.github.io/tutorials/tutorials/r_gbif_checklist/)
-
-- [Example R script for pulling data down from
-  GBIF](https://github.com/ikea-shark/up_and_down_vis?fbclid=IwAR3I7V8kJrh9EZi42xR_Wtcw619QNpZBPucIu7lLaI8NNWN-9u-l_0GYTj8)
+- [point count data analysis](https://bios2.github.io/posts/2021-03-25-point-count-data-analysis/)
 
 #### Package logo design
 
