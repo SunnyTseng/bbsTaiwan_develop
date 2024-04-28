@@ -103,3 +103,10 @@ package “bbsTaiwan”
 - Checked both rtrim and poptrend. Sent an request for poptrend anallysis.
 - rtrim package is out of date - can't install in RStudio
 - poptrend is published last year on CRAN, can potentially be an option
+
+
+#### 20240428 
+
+- Met with Eunseop, started migrating all the functions and datasets into a branch in the main package repository
+- Failing the CMD check QAQQQQ
+- Crying
